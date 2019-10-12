@@ -14,7 +14,7 @@ Crap.
 Where do we stuff our binaries now?
 
 ## ESConfigTool
-As it turns out, McAfee Endpoint Security ships with a program called "ESConfigTool". This program can be used to import and export configuration files. It's usage is described [here](https://docs.mcafee.com/bundle/endpoint-security-10.6.0-installation-guide-unmanaged-windows/page/GUID-31F0BE99-2186-4C4E-B0E3-96F3FED8DF49.html).
+McAfee Endpoint Security ships with a program called "ESConfigTool". This program can be used to import and export configuration files. It's usage is described [here](https://docs.mcafee.com/bundle/endpoint-security-10.6.0-installation-guide-unmanaged-windows/page/GUID-31F0BE99-2186-4C4E-B0E3-96F3FED8DF49.html).
 
 As it turns out, to get the settings from McAfee Endpoint Security you need:
 
