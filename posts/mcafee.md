@@ -160,7 +160,7 @@ Let's search for strings in our debugger and see if we can find the place this e
 
 ![Unlock failed](img/unlock_failed.png)
 
-Sweet, if we breakpoint this and run again it'll hit that breakpoint. If we then look at what happened just before that breakpoint we can see there was a fucntion call to something called "BLInvokeMethod" followed by a jump that was not taken in our case:
+Sweet, if we breakpoint this and run again it'll hit that breakpoint. If we then look at what happened just before that breakpoint we can see there was a function call to something called "BLInvokeMethod" followed by a jump that was not taken in our case:
 
 ![Password check function call](img/pw_check_call.png)
 
