@@ -376,7 +376,8 @@ One small footnote here is dat the "*/plaintext*" parameter can be a bit.. iffy.
 How is the configuration encrypted? Well, more on that later. That is still embargoed information untill the McAfee PSIRT gets a fix out there :).
 
 ## Remediation
-Talking about the McAfee PSIRT, they published a security advisory and a fix about this issue [here](https://kc.mcafee.com/corporate/index?page=content&id=SB10299). I've actually not tested to see if it's been fully fixed, and I'm too lazy to bother. 
+Talking about the McAfee PSIRT, they published a security advisory and a fix about this issue [here](https://kc.mcafee.com/corporate/index?page=content&id=SB10299) and assigned 
+CVE-2019-3653. I've actually not tested to see if it's been fully fixed, and I'm too lazy to bother. 
 
 One thing that did cross my mind though: if they fixed it in ESConfigTool, can you just use an older version of the tool to exploit it on newer versions of McAfee Endpoint Protection? Who knows. I've uploaded the python PoC script [here](https://github.com/dmaasland/mcfridafee/blob/master/mcafee.py) if you want to play around.
 
