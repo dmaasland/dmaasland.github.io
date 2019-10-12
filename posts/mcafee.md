@@ -373,7 +373,7 @@ Even though we only talked about exporting in this blog, it's good to mention th
 
 One small footnote here is dat the "*/plaintext*" parameter can be a bit.. iffy. Sometimes it works, sometimes it doesn't. Maybe different versions need different function offsets? Who knows. I wasn't too bothered with this. Because even though McAfee will give you an encrypted configuration without this parameter, you can simply import that encrypted configuration into your own evaluation version.
 
-How is the configuration encrypted? Well, more on that later. That is still embargoed information untill the McAfee PSIRT gets a fix out there :).
+How is the configuration encrypted? Well, more on that later. That is still embargoed information until the McAfee PSIRT gets a fix out there :).
 
 ## Remediation
 Talking about the McAfee PSIRT, they published a security advisory and a fix about this issue [here](https://kc.mcafee.com/corporate/index?page=content&id=SB10299) and assigned 
