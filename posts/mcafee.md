@@ -369,7 +369,7 @@ Well, we finally found a way to get our exclusions! And because it works over a 
 
 Even though we only talked about exporting in this blog, it's good to mention that you can also **import** configuration files. This means that you can add your own exclusions, change other settings or even remove the password altogether.
 
-One small footnote here is dat the "*/plaintext*" parameter can be a bit.. iffy. Sometimes it works, sometimes it doesn't. Maybe different versions need different function offsets? Who knows. I wasn't to bothered with this. Because even though McAfee will give you an encrypted configuration without this parameter, you can simply import that encrypted configuration into your own evaluation version.
+One small footnote here is dat the "*/plaintext*" parameter can be a bit.. iffy. Sometimes it works, sometimes it doesn't. Maybe different versions need different function offsets? Who knows. I wasn't too bothered with this. Because even though McAfee will give you an encrypted configuration without this parameter, you can simply import that encrypted configuration into your own evaluation version.
 
 How is the configuration encrypted? Well, more on that later. That is still embargoed information untill the McAfee PSIRT gets a fix out there :).
 
