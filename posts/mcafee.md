@@ -215,7 +215,7 @@ How are we going to find out what the admin check does? Let's just run the debug
 
 ![No admin](img/no_admin.png)
 
-If you follow this function you'll end up at a call to [AllocateAndInitializeSid](https://docs.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-allocateandinitializesid). All very boring stuff, and not really woth the time of reversing. Let's just try the lazy method again and change the return code.
+If you follow this function you'll end up at a call to [AllocateAndInitializeSid](https://docs.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-allocateandinitializesid). All very boring stuff, and not really worth the time of reversing. Let's just try the lazy method again and change the return code.
 
 Digging deeper, it turns out the return value is checked here:
 
