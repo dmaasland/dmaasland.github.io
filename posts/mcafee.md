@@ -96,7 +96,7 @@ Let's open up the XML and see if our exclusions are in there:
 Neat! That works. But this was done using administrative privileges *and* the correct password. Let's attach a debugger and see how it works.
 
 ## Self-defense
-Normally attaching a debugger would just be a case of opening your debugger, selecting your binary and perhaps adding some command-line arguments. However, since we are dealing with a security solution there are some additional hurdles. One big one is that most of McAfee's compontents are protected by the "Self-defense" feature of the product. If you try to attach your debugger you will immediatly get a "Debugging stopped" message and McAfee will shout at you in the Self Defense log file.
+Normally attaching a debugger would just be a case of opening your debugger, selecting your binary and perhaps adding some command-line arguments. However, since we are dealing with a security solution there are some additional hurdles. One big one is that most of McAfee's components are protected by the "Self-defense" feature of the product. If you try to attach your debugger you will immediatly get a "Debugging stopped" message and McAfee will shout at you in the Self Defense log file.
 
 ![Debugging stopped](img/debugging_stopped.png)
 
