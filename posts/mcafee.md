@@ -1,6 +1,8 @@
 # Bypass McAfee with McAfee
 ## Introduction
-I wasn't actually planning on writing this blog. Not because it's super secretive or anything, but because I'm super lazy. Unfortunately, [@fsdominguez](https://twitter.com/fsdominguez) and [@\_dirkjan](https://twitter.com/_dirkjan) forced me. So here we are ¯\\_(ツ)_/¯.
+I wasn't actually planning on writing this blog. Not because it's super secretive or anything, but because I'm super lazy. Unfortunately, [@fsdominguez](https://twitter.com/fsdominguez) and [@\_dirkjan](https://twitter.com/_dirkjan) forced me. 
+
+So here we are.. ¯\\_(ツ)_/¯.
 
 This is a story about how I used McAfee tools to bypass McAfee Endpoint Security during a (very TIBER-y) Red Team assignment we (aforementioned people and myself) were running. Let's go.
 
