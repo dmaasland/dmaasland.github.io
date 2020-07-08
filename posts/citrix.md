@@ -826,7 +826,7 @@ object={"uploadtext":{"filedir":false,"filedata":"data","filename":"/var/tmp/new
 ```
 
 ### Read files
-And finally, the ultimate goal, a PoC script to download random files from the Netscaler /ADC, without authentication. This includes things like
+And finally, the ultimate goal, a PoC script to download random files from the Netscaler / ADC, without authentication. This includes things like
 
 - the config file
 - admin sessions in /var/nstmp (all files are shown if you query the directory)
