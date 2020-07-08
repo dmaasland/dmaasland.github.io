@@ -642,7 +642,7 @@ if (strpos($query_params, 'loginchallengeresponse') !== false)
 
 If it is, it creates an array by splitting the query string on the `&` character. Then, if the string `requestbody` is present (again using `strpos()`). So if we set one of our query parameters, like `sid`, to `loginchallengeresponse1requestbody` we would be able to hit these checks and influence the `$query_params` variable.
 
-So what? I hear you think. Well, these query params are directly used in a call to the Nitro API. Remember the Nitro API? It's the one where we spent way too much time reverse engineering without any usable result:
+So what? I hear you think. Well, these query parameters are directly used in a call to the Nitro API. Remember the Nitro API? It's the one where we spent way too much time reverse engineering without any usable result:
 
 ```php
 $nitro = new nitro();
@@ -669,7 +669,7 @@ function ns_empty(&$var)
 }
 ```
 
-Ha! That returns `FALSE` in our case. So we pass the check! Here's all of this in one HTTP request (the cookie value can be whatever, as long as its a 32 character hex string):
+Ha! That returns `FALSE` in our case. So we pass the check! Here's all of this in one HTTP request (the cookie value can be whatever, as long as it's a 32 character hex string):
 
 ```http
 POST /pcidss/report?type=allprofiles&sid=loginchallengeresponse1requestbody&username=nsroot&set=1 HTTP/1.1
