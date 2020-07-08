@@ -11,7 +11,7 @@ Furthermore, you will see that everything I'm disclosing here isn't exactly rock
 Also, thanks to my former colleagues at Fox-IT for setting up a Citrix environment for me to play around in!
 
 ## Introduction
-If you're still with me you probably don't need an introduction into [CVE-2019-19781](https://support.citrix.com/article/CTX267027). This was a high risk vulnerability in Citrix Netscaler / ADC devices allowing for unauthenticated remote code execution. Disclosed in Decemter 2019 it caused quite a circus among Citrix customers. After a temporary [mitigation](https://support.citrix.com/article/CTX267679) for the vulnerability was released I was asked to help assess if this mitigation was effective.
+If you're still with me you probably don't need an introduction into [CVE-2019-19781](https://support.citrix.com/article/CTX267027). This was a high risk vulnerability in Citrix Netscaler / ADC devices allowing for unauthenticated remote code execution. Disclosed in December 2019 it caused quite a circus among Citrix customers. After a temporary [mitigation](https://support.citrix.com/article/CTX267679) for the vulnerability was released I was asked to help assess if this mitigation was effective.
 
 After firing up my VM and poking at it a bit I quickly found that the mitigation seemed effective if implemented properly, but I was soon distracted by other "interesting" things I saw in the Netscaler / ADC code. For those of you that don't know, these devices run FreeBSD as an operating system and use plain (non-obfuscated) PHP for most of their web-facing stuff. So it is pretty easy to get access to the source code.
 
