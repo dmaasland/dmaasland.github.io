@@ -543,7 +543,7 @@ Upgrade-Insecure-Requests: 1
 ### Create a session without credentials
 There is some functionality which can be used without authenticating. The majority requires a valid `SESSID` cookie though. So that's what I wanted to obtain. Without credentials of course. My noble quest led me to the `report` function in the file `pcidss.php`. 
 
-This file allows for a variaty of report types, but most require authentication. After some digging I found the `allprofiles` report type:
+This file allows for a variety of report types, but most require authentication. After some digging I found the `allprofiles` report type:
 ```php
 case 'allprofiles':
     if($genPDF = $this->init($data))
