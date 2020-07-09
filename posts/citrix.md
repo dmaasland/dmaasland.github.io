@@ -1,12 +1,12 @@
 # Adventures in Citrix security research
 ## Preface
-Before we start off on the adventures I just wanted to state that the only reason for writing this blog is to share technical knowledge with others. I know Citrix have [this](https://www.citrix.com/blogs/2020/07/07/citrix-provides-context-on-security-bulletin-ctx276688/) to say about disclosing technical vulnerability details:
+Before we start off on the adventures I just wanted to state that the only reason for writing this blog is to share technical knowledge with others. I know Citrix has [this](https://www.citrix.com/blogs/2020/07/07/citrix-provides-context-on-security-bulletin-ctx276688/) to say about disclosing technical vulnerability details:
 
 >We are limiting the public disclosure of many of the technical details of the vulnerabilities and the patches to further protect our customers. Across the industry, today’s sophisticated malicious actors are using the details and patches to reverse engineer exploits. As such, we are taking steps to advise and help our customers but also do what we can to shield intelligence from malicious actors.
 
-While I understand that this position makes sense for a large corporation and I respect their opinion, I respectfully disagree. I sincerely doubt that "sophisticated malicious actors" need me to provide them with new offensive tooling. I firmly believe that when you don't provide technical details about vulnerabilities you are preventing defensive teams from creating proper detection and mitigation against security issues as well as preventing new security analysts from learning. If other people hadn't created write-ups of the vulnerabilities they found, I wouldn't have been able to find these.
+While I understand that this position makes sense for a large corporation and I respect their opinion, I respectfully disagree. I sincerely doubt that "sophisticated malicious actors" need me to provide them with new offensive tooling. I firmly believe that when you don't provide technical details about vulnerabilities you are preventing defensive teams from creating proper detection and mitigation measures against security issues as well as preventing new security analysts and developers from learning from past mistakes. If other people hadn't created write-ups of the vulnerabilities they found, I wouldn't have been able to find these results you see here today.
 
-Furthermore, you will see that everything I'm disclosing here isn't exactly rocket science. Should you continue reading that is. I'm even willing to bet most of these vulnerabilities have been known to other people for a while now. If you still want to open up a discussion about this, please do. You probably won't be able to change my mind though. Plus, all of this research was done on the NSIP, which shouldn't be publicly available in the first place!
+Furthermore, you will see that everything I'm disclosing here isn't exactly rocket science. I'm even willing to bet most of these vulnerabilities have been known to other people for a while now. If you still want to open up a discussion about this, please feel free. You probably won't be able to change my mind though. Plus, all of this research was done on the NSIP, which shouldn't be publicly available in the first place!
 
 Also, thanks to my former colleagues at Fox-IT for setting up a Citrix environment for me to play around in!
 
@@ -263,7 +263,7 @@ $response = nsrest_exec($is_gui, $this->request_method, $post_body, $this->usern
     $this->send_response($response, $this->request_method, $this->validate_and_get_entity_type($arg_list), $is_gui);
 ```
 
-The `nsrest_exec()` function is a custom PHP function shipped by Citrix in a library file called `libphp7.so`. This function either returns an XML object upon succesful execution, or `FALSE` if it fails. Somewhere along the line `FALSE` turns to `NULL` and `NULL` turns to `0`. I don't know the exact inner workins of `nsrest_exec` but long story short: invalid XML in `X-NITRO-ONERROR` means a response that indicates all is well.
+The `nsrest_exec()` function is a custom PHP function shipped by Citrix in a library file called `libphp7.so`. This function either returns an XML object upon successful execution, or `FALSE` if it fails. Somewhere along the line `FALSE` turns to `NULL` and `NULL` turns to `0`. I don't know the exact inner workings of `nsrest_exec` but long story short: invalid XML in `X-NITRO-ONERROR` means a response that indicates all is well.
 
 For example, this request containing invalid XML:
 ```http
