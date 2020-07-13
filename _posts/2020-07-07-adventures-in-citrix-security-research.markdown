@@ -331,7 +331,7 @@ sid=254&pe=1,2,3,4,5&appname=%0a</title><script>alert('xss')</script>&au=1&usern
 
 It's really not that special, but went ahead and made an XSS to shell PoC just for funsies. Only works if you get an admin to click obviously.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=1_D4_9BKHSc" target="_blank"><img src="http://img.youtube.com/vi/1_D4_9BKHSc/0.jpg" width="240" height="180" border="10" /></a>
+<a href="https://www.youtube.com/watch?feature=player_embedded&v=1_D4_9BKHSc" target="_blank"><img src="https://img.youtube.com/vi/1_D4_9BKHSc/0.jpg" width="240" height="180" border="10" /></a>
 
 And here is the code if you feel really bored:
 
