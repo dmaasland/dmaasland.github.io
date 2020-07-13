@@ -1,4 +1,8 @@
-# Bypass McAfee with McAfee
+---
+title: "Bypass McAfee with McAfee"
+redirect_from:
+  - /posts/mcafee.html
+---
 ## Introduction
 I wasn't actually planning on writing this blog. Not because it's super secretive or anything, but because I'm super lazy. Unfortunately, [@fsdominguez](https://twitter.com/fsdominguez) and [@\_dirkjan](https://twitter.com/_dirkjan) forced me. 
 
@@ -29,7 +33,7 @@ Crap.
 
 Let's download an evaluation version of McAfee Endpoint Security and see if there is anything we can do.
 
-![McAfee Endpoint Security](img/mcafeeep.png)
+![McAfee Endpoint Security](/assets/img/bypass-mcafee/mcafeeep.png)
 
 ## Reversing
 Now, this is where things get a bit tricky. I'm about as proficient at reverse engineering as a drunken monkey is at flinging poop. Kind of hit-or-miss.
@@ -40,11 +44,11 @@ So, let's start at the beginning for once and see if we can actually get the too
 * *mimikatz.exe
 * C:\\TotallyLegit\\
 
-![Exclusions](img/exclusions.png)
+![Exclusions](/assets/img/bypass-mcafee/exclusions.png)
 
 I've also protected the settings with the password: ***starwars***.
 
-![Password](img/password.png)
+![Password](/assets/img/bypass-mcafee/password.png)
 
 Let's open up an admin command prompt and see if we can get the settings.
 
@@ -100,7 +104,7 @@ Neat! That works. But this was done using administrative privileges *and* the co
 ## Self-defense
 Normally attaching a debugger would just be a case of opening your debugger, selecting your binary and perhaps adding some command-line arguments. However, since we are dealing with a security solution there are some additional hurdles. One big one is that most of McAfee's components are protected by the "Self-defense" feature of the product. If you try to attach your debugger you will immediately get a "Debugging stopped" message and McAfee will shout at you in the Self Defense log file.
 
-![Debugging stopped](img/debugging_stopped.png)
+![Debugging stopped](/assets/img/bypass-mcafee/debugging_stopped.png)
 
 ```
 12/10/2019 12:47:09   mfeesp(2204.6392) <SYSTEM> ApBl.SP.Activity: DESKTOP-DNUK2R5\admin ran X64DBG.EXE, which attempted to access ESCONFIGTOOL.EXE, violating the rule "Core Protection - Protect McAfee processes from unauthorized access and termination", and was blocked. For information about how to respond to this event, see KB85494.
@@ -137,7 +141,7 @@ C:\temp>
 
 That's it? That's it! You don't even need admin privileges. Any regular user can do this. Great success! Now it's just a matter of attaching a debugger and we're ready to rock:
 
-![Debugged](img/debugged.png)
+![Debugged](/assets/img/bypass-mcafee/debugged.png)
 
 ..now what?
 
@@ -158,11 +162,11 @@ Hmm, that's pretty generic. The McAfee log file offers more information though:
 
 Let's search for strings in our debugger and see if we can find the place this error is coming from.
 
-![Unlock failed](img/unlock_failed.png)
+![Unlock failed](/assets/img/bypass-mcafee/unlock_failed.png)
 
 Sweet, if we breakpoint this and run again it'll hit that breakpoint. If we then look at what happened just before that breakpoint we can see there was a function call to something called "BLInvokeMethod" followed by a jump that was not taken in our case:
 
-![Password check function call](img/pw_check_call.png)
+![Password check function call](/assets/img/bypass-mcafee/pw_check_call.png)
 
 At this point we have a decision to make. We can either:
 
@@ -171,20 +175,20 @@ At this point we have a decision to make. We can either:
 
 Obviously, because I'm very lazy, I went with option 2. When a wrong password is entered, an error code is placed in the RAX register by the password check function:
 
-![Password error](img/error_code.png)
+![Password error](/assets/img/bypass-mcafee/error_code.png)
 
 If the correct password is supplied, the value of the RAX register is 0:
 
-![Password correct](img/success_code.png)
+![Password correct](/assets/img/bypass-mcafee/success_code.png)
 
 So what happens if we supply the wrong password, break on the password check function, and change the RAX register to 0? Let's try!
 
-![RAX changed](img/rax_change.png)
+![RAX changed](/assets/img/bypass-mcafee/rax_change.png)
 
 No way it worked!
 
-![Success](img/success.png)
-![Exported](img/exported.png)
+![Success](/assets/img/bypass-mcafee/success.png)
+![Exported](/assets/img/bypass-mcafee/exported.png)
 
 Turns out the password check is only done by the tool itself. It's not really needed to decrypt or export the actual configuration. That's one down, one to go.
 
@@ -215,21 +219,21 @@ Crap.
 
 How are we going to find out what the admin check does? Let's just run the debugger as a regular user and see what happens. Turns out it calls a function, does a string compare on the return value and calls "*exit*" if the return code isn't 0.
 
-![No admin](img/no_admin.png)
+![No admin](/assets/img/bypass-mcafee/no_admin.png)
 
 If you follow this function you'll end up at a call to [AllocateAndInitializeSid](https://docs.microsoft.com/en-us/windows/win32/api/securitybaseapi/nf-securitybaseapi-allocateandinitializesid). All very boring stuff, and not really worth the time of reversing. Let's just try the lazy method again and change the return code.
 
 Digging deeper, it turns out the return value is checked here:
 
-![Admin compare](img/admin_compare.png)
+![Admin compare](/assets/img/bypass-mcafee/admin_compare.png)
 
 Although this time the return value has to be **anything but** 0.
 
-![Admin 1](img/admin_1.png)
+![Admin 1](/assets/img/bypass-mcafee/admin_1.png)
 
 Ho-ly cow it worked again!
 
-![Worked!](img/worked.png)
+![Worked!](/assets/img/bypass-mcafee/worked.png)
 
 We can now export the configuration from McAfee Endpoint Security, with limited privileges and without knowing the proper password!
 
@@ -276,7 +280,7 @@ Session(pid=11168)
 
 We are connected and ESConfigTool.exe is running!
 
-![Task Manager](img/taskmanager.png)
+![Task Manager](/assets/img/bypass-mcafee/taskmanager.png)
 
 We can now inject JavaScript code into the ESConfigTool process.
 
@@ -362,7 +366,7 @@ It does exactly what we were manually doing in our debugger. Change return value
 ```
 
 Sure looks like it does:
-![Frida](img/frida.png)
+![Frida](/assets/img/bypass-mcafee/frida.png)
 
 (I know, I'm running it as the "admin" user, but without UAC elevation. Trust me when I say it works with a regular user as well)
 

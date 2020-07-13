@@ -1,4 +1,8 @@
-# Adventures in Citrix security research
+---
+title: "Adventures in Citrix security research"
+redirect_from:
+  - /posts/citrix.html
+---
 ## Preface
 Before we start off on the adventures I just wanted to state that the only reason for writing this blog is to share technical knowledge with others. I know Citrix has [this](https://www.citrix.com/blogs/2020/07/07/citrix-provides-context-on-security-bulletin-ctx276688/) to say about disclosing technical vulnerability details:
 
@@ -158,7 +162,7 @@ Connection: close
 Upgrade-Insecure-Requests: 1
 ```
 
-![](img/default_signature.png)
+![](/assets/img/citrix-research/default_signature.png)
 
 Reason for this is that authentication isn't checked when requesting `_default_signature_` as your `sig_name`.
 
@@ -538,7 +542,7 @@ Connection: close
 Cookie: startupapp=neo; is_cisco_platform=0; stst=stst; uatz=uatz; drep=Jemoeder; st_splitter=350px; rdx_pagination_size=25%20Per%20Page; SESSID=9ed492e6ff1876d44ddcaec143d2f949
 Upgrade-Insecure-Requests: 1
 ```
-![](img/dirlist.png)
+![](/assets/img/citrix-research/dirlist.png)
 
 ### Create a session without credentials
 There is some functionality which can be used without authenticating. The majority requires a valid `SESSID` cookie though. So that's what I wanted to obtain. Without credentials of course. My noble quest led me to the `report` function in the file `pcidss.php`. 

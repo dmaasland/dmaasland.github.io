@@ -1,16 +1,108 @@
-plugins:
-  - jekyll-relative-links
-relative_links:
-  enabled: true
-  collections: true
-include:
-  - CONTRIBUTING.md
-  - README.md
-  - LICENSE.md
-  - COPYING.md
-  - CODE_OF_CONDUCT.md
-  - CONTRIBUTING.md
-  - ISSUE_TEMPLATE.md
-  - PULL_REQUEST_TEMPLATE.md
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-theme: jekyll-theme-slate
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Unauthorized Access Blog
+email: donny@unauthorizedaccess.nl
+description: >- # this means to ignore newlines until "baseurl:"
+  When I'm ever in the mood to write something down I think is cool,
+  it'll end up here.
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://blog.unauthorizedaccess.nl" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: donnymaasland
+github_username:  dmaasland
+repository: dmaasland/dmaasland.github.io
+
+# Build settings
+markdown: kramdown
+#theme: minima
+remote_theme: "mmistakes/minimal-mistakes@4.19.3"
+minimal_mistakes_skin: "dark"
+
+plugins:
+  - jekyll-include-cache
+  - jekyll-feed
+  - jekyll-redirect-from
+
+analytics:
+  provider: "google"
+  google:
+    tracking_id: "UA-172008126-1"
+    anonymize_ip: false
+
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+
+author:
+  name             : "Donny Maasland"
+  avatar           : /assets/img/profile.png
+  bio              : "I sometimes discover something interesting by accident, and people seem
+  to enjoy reading about it."
+  location         : "Between keyboard and chair"
+  uri              :
+  home             : # null (default), "absolute or relative url to link to author home"
+  bitbucket        :
+  codepen          :
+  dribbble         :
+  flickr           :
+  facebook         :
+  foursquare       :
+  github           : dmaasland
+  gitlab           :
+  google_plus      :
+  keybase          :
+  instagram        :
+  lastfm           :
+  linkedin         : donny-maasland-13801720 # "john-doe-12345678" (the last part of your profile url, e.g. https://www.linkedin.com/in/john-doe-12345678)
+  pinterest        :
+  soundcloud       :
+  stackoverflow    : # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
+  steam            : # "steamId" (the last part of your profile url, e.g. https://steamcommunity.com/id/steamId/)
+  tumblr           :
+  twitter          : dmaasland
+  vine             :
+  weibo            :
+  xing             :
+  youtube          : # "https://youtube.com/c/MichaelRoseDesign"
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      classes: wide
+      author_profile: true
+      read_time: true
+      comments: # true
+      share: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+related: true
