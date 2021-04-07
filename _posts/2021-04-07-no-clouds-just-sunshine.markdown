@@ -23,8 +23,8 @@ while the other side holds the NAND:
 
 It also has the word "Overkiz" on the board, as well as "Minibox 868". Throwing those into Google yielded two brochures about the "Overkiz Minibox":
 
-- https://www.overkiz.com/templates/front/pdf/fiche_minibox_web.pdf
-- https://www.overkiz.com/wp-content/uploads/2018/12/FICHE_PRODUIT_MINIBOX_2019-EN.pdf
+- [https://www.overkiz.com/templates/front/pdf/fiche_minibox_web.pdf](https://www.overkiz.com/templates/front/pdf/fiche_minibox_web.pdf)
+- [https://www.overkiz.com/wp-content/uploads/2018/12/FICHE_PRODUIT_MINIBOX_2019-EN.pdf](https://www.overkiz.com/wp-content/uploads/2018/12/FICHE_PRODUIT_MINIBOX_2019-EN.pdf)
 
 Turns out the same product is sold under different names:
 
@@ -38,8 +38,8 @@ Also, one of the brochures mentions the device can also operate in "offline" mod
 ## Dumping the firmware
 This gave me some leads to go on. I discovered that multiple people had already done some work on the thing:
 
-- https://github.com/Aldohrs/tahoma-jailbreak (This was for the Tahoma, but it's similar)
-- https://www.lafois.com/2020/12/20/rooting-the-cozytouch-aka-kizbox-mini-part-5/
+- [https://github.com/Aldohrs/tahoma-jailbreak](https://github.com/Aldohrs/tahoma-jailbreak) (This was for the Tahoma, but it's similar)
+- [https://www.lafois.com/2020/12/20/rooting-the-cozytouch-aka-kizbox-mini-part-5/](https://www.lafois.com/2020/12/20/rooting-the-cozytouch-aka-kizbox-mini-part-5/)
 
 Though both guides weren't exactly tutorials for what I was trying to do, they did give me some useful pointers. The most important pointer came from the "tahoma-jailbreak" github repository. Here, he found a way to force the ARM SOC into some sort of recovery mode. Long story short, if you provide 3.3v to pin 9 of the flash chip during boot, it'll go into this mode.
 
@@ -51,7 +51,7 @@ All you have to do is bridge these points while you plug in the USB power and th
 
 ![6b1429cd-699a-4a31-b7dd-715ec3520533](/assets/img/somfy/6b1429cd-699a-4a31-b7dd-715ec3520533.jpg)
 
-Now download the following software: https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAM-BA%20In-system%20Programmer
+Now download the following software: [https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAM-BA%20In-system%20Programmer](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAM-BA%20In-system%20Programmer)
 
 and run these commands:
 
