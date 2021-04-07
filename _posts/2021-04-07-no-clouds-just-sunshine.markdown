@@ -138,11 +138,11 @@ And now you can locally interact with the device :)
 ## Now what?
 Well, this is as far as I've gotten. Not because I'm stuck, but because I don't have any devices to connect yet. I thought this was a good time to post this blog, just to see if:
 
-- This project is interesting to anyone and if I should contintue to make it production ready
+- This project is interesting to anyone and if I should continue to make it production ready
 - If there is anyone who can give me some tips and / or pointes about the "pairing mode"
 - There is anyone who can offer me some help in general.
 
-I noticed that the API is pretty similar to the cloud version, but not all features are implemented. My endgame would be to make the current Home Assistant Tahoma integration compatible, but I have no clue on how to do that. I'm familier with python, just nog with HA integrations.
+I noticed that the API is pretty similar to the cloud version, but not all features are implemented. My endgame would be to make the current Home Assistant Tahoma integration compatible, but I have no clue on how to do that. I'm familier with python, just not with HA integrations.
 
 Anyway, that's it. I'm open to your thoughts and / or suggestions! To be continued :).
 
