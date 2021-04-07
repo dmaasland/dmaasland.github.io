@@ -5,7 +5,7 @@ title: "No clouds, just sunshine. Disconnecting Somfy Connexoon from the cloud."
 ## Introduction
 I've bought some new shutters recently and got the Connexoon with my purchase for free. After connecting the device I was disappoinited to learn that it requires both an internet connection and an account to function properly. So for the last few days I've been working on a way to do away with that!
 
-![96767ece-3eb9-40d4-9615-ae1a19d1c65a|666x500](/assets/img/somfy/96767ece-3eb9-40d4-9615-ae1a19d1c65a.jpg) 
+![96767ece-3eb9-40d4-9615-ae1a19d1c65a](/assets/img/somfy/96767ece-3eb9-40d4-9615-ae1a19d1c65a.jpg) 
 
 ## Goal
 The goal for this project is to be able to control my Connexoon devices through Home Assistant without the need for the device to be connected to a cloud service and without the use of an account.
@@ -15,11 +15,11 @@ First thing I did was a little network discovery. Unfortunately, port scanning t
 
 So, next thing I did was open it up and take a look at the board. The device has no screws and can be pryed open with a flathead screwdriver or another thin piece of metal. The board itself isn't anything special. One side has an ARM9G25 and some RAM:
 
-![995baae1-1476-44dc-aa3d-dc1ffcbcc7fe|375x500](/assets/img/somfy/995baae1-1476-44dc-aa3d-dc1ffcbcc7fe.jpg) 
+![995baae1-1476-44dc-aa3d-dc1ffcbcc7fe](/assets/img/somfy/995baae1-1476-44dc-aa3d-dc1ffcbcc7fe.jpg) 
 
 while the other side holds the NAND:
 
-![19e2efec-033b-466e-b587-691251f94d2c|666x500](/assets/img/somfy/19e2efec-033b-466e-b587-691251f94d2c.jpg) 
+![19e2efec-033b-466e-b587-691251f94d2c](/assets/img/somfy/19e2efec-033b-466e-b587-691251f94d2c.jpg) 
 
 It also has the word "Overkiz" on the board, as well as "Minibox 868". Throwing those into Google yielded two brochures about the "Overkiz Minibox":
 
@@ -45,11 +45,11 @@ Though both guides weren't exactly tutorials for what I was trying to do, they d
 
 Turns out this is also true for the Connexoon. I spent some time looking around the board with a multimeter and found both a 3.3v source as well as a test pad connected directly to pin 9 on the NAND chip:
 
-![Naamloos|560x500](/assets/img/somfy/Naamloos.png) 
+![Naamloos](/assets/img/somfy/Naamloos.png) 
 
 All you have to do is bridge these points while you plug in the USB power and then let go. Obviously, plug the other end into your computer. I used a paperclip which worked very well. If you've done it correctly the power LED will not turn on and you'll have a new device connected to your machine:
 
-![6b1429cd-699a-4a31-b7dd-715ec3520533|690x79](/assets/img/somfy/6b1429cd-699a-4a31-b7dd-715ec3520533.jpg)
+![6b1429cd-699a-4a31-b7dd-715ec3520533](/assets/img/somfy/6b1429cd-699a-4a31-b7dd-715ec3520533.jpg)
 
 Now download the following software: https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAM-BA%20In-system%20Programmer
 
@@ -101,7 +101,7 @@ As it turns out, enabling the local API is rather simple. Just four steps:
 
 You should now be able to acces the local API with a browser:
 
-![api|690x162](/assets/img/somfy/api.png) 
+![api](/assets/img/somfy/api.png) 
 
 Now, this is where I got stuck for a while. The only two things you can visit without authentication are:
 
@@ -131,7 +131,7 @@ There's three arguments you can give it:
 
 What you get in return is a token you can use in all requests to the API by placing it in the **`X-AUTH-TOKEN`** header of your request:
 
-![api_2|690x278](/assets/img/somfy/api_2.png) 
+![api_2](/assets/img/somfy/api_2.png) 
 
 And now you can locally interact with the device :)
 
