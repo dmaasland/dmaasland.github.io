@@ -111,7 +111,7 @@ Now, this is where I got stuck for a while. The only two things you can visit wi
 The first URL simply prints the version and the second one will always give the following message:
 
 ```json
-{"error":"Missing authorization token.","errorCode":"RESOURCE_ACCESS_DENIED"}
+{"error":"Gateway is not in pairing mode.","errorCode":"NOT_IN_PAIRING_MODE"}
 ```
 
 No matter what I did, I could not find a way around this. I've pressed every combination of buttons on the device I could think of, I've spent hours searching through the filesystem, nothing. So I tried creating a user locally. Turns out you can generate a "token" on the device by running:
