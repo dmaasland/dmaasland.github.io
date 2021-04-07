@@ -133,7 +133,7 @@ What you get in return is a token you can use in all requests to the API by plac
 
 ![api_2|690x278](/assets/img/somfy/api_2.png) 
 
-And now you can locally interact with the device :slight_smile:
+And now you can locally interact with the device :)
 
 ## Now what?
 Well, this is as far as I've gotten. Not because I'm stuck, but because I don't have any devices to connect yet. I thought this was a good time to post this blog, just to see if:
@@ -144,5 +144,5 @@ Well, this is as far as I've gotten. Not because I'm stuck, but because I don't 
 
 I noticed that the API is pretty similar to the cloud version, but not all features are implemented. My endgame would be to make the current Home Assistant Tahoma integration compatible, but I have no clue on how to do that. I'm familier with python, just nog with HA integrations.
 
-Anyway, that's it. I'm open to your thoughts and / or suggestions! 
+Anyway, that's it. I'm open to your thoughts and / or suggestions! To be continued :).
 
