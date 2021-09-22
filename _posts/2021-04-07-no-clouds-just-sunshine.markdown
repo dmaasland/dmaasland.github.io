@@ -3,7 +3,11 @@ title: "No clouds, just sunshine. Disconnecting Somfy Connexoon from the cloud."
 ---
 
 ## Update: 22-09-2021
-Added my notes on how to modify and re-flash the firmware. See [Getting access](#getting-access).
+Added my notes on how to modify and re-flash the firmware. See [Getting access](#getting-access). I was also able to "hack" the Tahoma custom integration for Home Assistant to support this. Check out this demo on YouTube:
+
+[![Local API Somfy HA Integration](https://img.youtube.com/vi/l1UXrBbLtWQ/0.jpg)](https://youtu.be/l1UXrBbLtWQ "Local API Somfy HA Integration")
+
+Check the progress of the official integration [here](https://github.com/iMicknl/ha-tahoma/issues/576).
 
 ## Introduction
 I've bought some new shutters recently and got the Connexoon with my purchase for free. After connecting the device I was disappoinited to learn that it requires both an internet connection and an account to function properly. So for the last few days I've been working on a way to do away with that!
