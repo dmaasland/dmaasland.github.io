@@ -74,8 +74,8 @@ This will write the boatloader and the actual firmware to seperate files.
 This is where things started to get messy. Although there were some scripts available to do certain things with the firmware, they didn't work out of the box and some instructions were missing. If you want I can go into details, but globally what you have to to to enable SSH is:
 
 - Mount the root filesystem
-- Set a password hash for the **`root`** user
-- Create a symlink for dropbear in **`etc/rc5.d`** by running ```ln -s ../init.d/dropbear S06dropbear```
+- Set a password hash for the *`root`* user
+- Create a symlink for dropbear in *`etc/rc5.d`* by running ```ln -s ../init.d/dropbear S06dropbear```
 - Re-pack the firmware and write it
 
 Here are my raw notes for this process:
