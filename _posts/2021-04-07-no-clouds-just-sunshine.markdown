@@ -2,6 +2,9 @@
 title: "No clouds, just sunshine. Disconnecting Somfy Connexoon from the cloud."
 ---
 
+## Update: 22-09-2021
+Added my notes on how to modify and re-flash the firmware. See [Getting access](#getting-access).
+
 ## Introduction
 I've bought some new shutters recently and got the Connexoon with my purchase for free. After connecting the device I was disappoinited to learn that it requires both an internet connection and an account to function properly. So for the last few days I've been working on a way to do away with that!
 
@@ -71,11 +74,82 @@ This is where things started to get messy. Although there were some scripts avai
 - Create a symlink for dropbear in **`etc/rc5.d`** by running ```ln -s ../init.d/dropbear S06dropbear```
 - Re-pack the firmware and write it
 
-For writing, you use the command:
+Here are my raw notes for this process:
+
+### Create local folders
 ```shell
-/sam-ba -p usb -b sam9xx5-ek -a nandflash:::0xc0902405 -c erase:0x20000 -c write:ubi-volume.bin:0x20000 -c verify:ubi-volume.bin:0x20000
+mkdir ubi-root
+mkdir ubi-rootB
+mkdir extract
 ```
 
+### Prepare the virtual NAND
+```shell
+sudo modprobe nandsim first_id_byte=0xec second_id_byte=0xa1 third_id_byte=0x00 fourth_id_byte=0x15;
+sudo flash_erase /dev/mtd0 0 0
+sudo nandwrite /dev/mtd0 ubi-volume.bin
+sudo modprobe ubi
+sudo ubiattach -p /dev/mtd0 -O 2048
+```
+
+### Mount the "root" and "rootB" partition
+```shell
+sudo mount -t ubifs -o rw /dev/ubi0_7 ubi-root
+sudo mount -t ubifs -o rw /dev/ubi0_9 ubi-rootB
+```
+
+### Enable dropbear
+```shell
+cd ubi-root/etc/rc5.d
+sudo ln -s ../init.d/dropbear S06dropbear
+cd ubi-root/etc/rc2.d
+sudo ln -s ../init.d/dropbear S06dropbear
+
+cd ubi-rootB/etc/rc5.d
+sudo ln -s ../init.d/dropbear S06dropbear
+cd ubi-rootB/etc/rc2.d
+sudo ln -s ../init.d/dropbear S06dropbear
+```
+
+### Edit the root hash
+Edit the /etc/shadow file in both the root and rootB partitions. Either generate a new one or use this one for password "password":
+```
+root:$1$3.rYPE8p$iS4JnDcUp3ivjo3LTH4Y3.:18799:0:99999:7:::
+```
+
+### Unmount partitions
+```shell
+sudo umount ubi-root
+sudo umount ubi-rootB
+```
+
+### Rebuild the firmware
+```shell
+for i in {0..10}; do name=$(ubinfo -d 0 -n $i | grep Name | awk '{print $2}'); sudo dd if=/dev/ubi0_$i of=extract/$name.bin; done
+
+cd extract
+for i in {0..5}; do name=$(ubinfo -d 0 -n $i | grep Name | awk '{print $2}');size=$(ubinfo -d 0 -n $i | grep Size | cut -d '(' -f 2 | cut -d ' ' -f 1); echo -en "[$name]\nmode=ubi\nimage=$name.bin\nvol_id=$i\nvol_size=$size\nvol_type=static\nvol_name=$name\nvol_alignment=1\n\n"; done > config.ini
+for i in {6..10}; do name=$(ubinfo -d 0 -n $i | grep Name | awk '{print $2}');size=$(ubinfo -d 0 -n $i | grep Size | cut -d '(' -f 2 | cut -d ' ' -f 1); echo -en "[$name]\nmode=ubi\nimage=$name.bin\nvol_id=$i\nvol_size=$size\nvol_type=dynamic\nvol_name=$name\nvol_alignment=1\n\n"; done >> config.ini
+
+ubinize -o ../ubi-volume_patched.bin -p 131072 -m 2048 -O 2048 -s 512 -Q 1056559212 config.ini
+cd ..
+```
+
+### Clean-up
+```shell
+sudo umount /dev/ubi0_*
+sudo ubidetach -p /dev/mtd0
+sudo rmmod ubifs ubi nandsim
+```
+
+### Flash the new firmware
+```shell
+./sam-ba_3.5/sam-ba -p usb -b sam9xx5-ek -a lowlevel
+./sam-ba_3.5/sam-ba -p usb -b sam9xx5-ek -a extram
+./sam-ba_3.5/sam-ba -p usb -b sam9xx5-ek -a nandflash:::0xc0902405 -c erase:0x20000 -c write:ubi-volume_patched.bin:0x20000 -c verify:ubi-volume_patched.bin:0x20000
+```
+
+### SSH
 Then, reboot the device. If all went well you should now be able to SSH into the device:
 
 ```shell
@@ -90,6 +164,14 @@ user:    jenkins
 ```
 
 (hostname censored, as that is your device PIN)
+
+If you want to change the password for example, simply mount the filesystem as read-write:
+
+```shell
+mount -o remount,rw /
+# do things
+mount -o remount,ro /
+```
 
 ## Enabling the local api
 As it turns out, enabling the local API is rather simple. Just four steps:
