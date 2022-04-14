@@ -2,6 +2,14 @@
 title: "No clouds, just sunshine. Disconnecting Somfy Connexoon from the cloud."
 ---
 
+## Update: 14-04-2022
+Newer firmwares introduced some changes, namely:
+
+1. Root partition space is 100% used, so resizing is needed. See [Optional: resize](#optional-resize)
+2. Password authentication for SSH is disabled. See: [Note: password authentication](#note-password-authentication)
+
+Also, if you want to use the new [developer mode](https://developer.somfy.com/) on your Connexoon you will either have to generate SSL certificates yourself. See the configuration files at **`/etc/lighttpd.d/ssl.conf`** and **`/etc/lighttpd.d/8443/devmodesocket.conf`** for hints.
+
 ## Update: 22-09-2021
 Added my notes on how to modify and re-flash the firmware. See [Getting access](#getting-access). I was also able to "hack" the Tahoma custom integration for Home Assistant to support this. Check out this demo on YouTube:
 
@@ -102,6 +110,45 @@ sudo mount -t ubifs -o rw /dev/ubi0_7 ubi-root
 sudo mount -t ubifs -o rw /dev/ubi0_9 ubi-rootB
 ```
 
+#### Optional: resize
+Should you run into issues where the UBI partition is out of space, you can enlarge it by using the following commands:
+
+First, check the original size of the partition you want to enlarge. In my case this was **`root`** (ubi0_7):
+
+```shell
+$ ubinfo /dev/ubi0_7
+
+Volume ID:   7 (on ubi0)
+Type:        dynamic
+Alignment:   1
+Size:        167 LEBs (21204992 bytes, 20.2 MiB)
+State:       OK
+Name:        root
+Character device major/minor: 508:8
+```
+
+Currently the size of the **`root`** partition is **167 LEBs**. In my case I enlarged it to 204 LEBs with the following command:
+
+```shell
+sudo ubirsvol /dev/ubi0 -n 7 -S 206
+```
+
+If you check the size again you'll notie it has grown:
+
+```shell
+$ ubinfo /dev/ubi0_7
+
+Volume ID:   7 (on ubi0)
+Type:        dynamic
+Alignment:   1
+Size:        206 LEBs (26157056 bytes, 24.9 MiB)
+State:       OK
+Name:        root
+Character device major/minor: 508:8
+```
+
+Just make sure it doesn't grow larger than the space available on the flash chip of the Connexoon.
+
 ### Enable dropbear
 ```shell
 cd ubi-root/etc/rc5.d
@@ -114,6 +161,12 @@ sudo ln -s ../init.d/dropbear S06dropbear
 cd ubi-rootB/etc/rc2.d
 sudo ln -s ../init.d/dropbear S06dropbear
 ```
+
+#### Note: password authentication 
+Later firmware versions seem to have disabled password authentication. Either:
+
+1. Re-enable it by editing **`/etc/default/dropbear`** and commenting out (or removing) this line: ```DROPBEAR_EXTRA_ARGS="$DROPBEAR_EXTRA_ARGS -s"```
+2. Remove the **`authorized_keys`** symlink in **`/root/.ssh/`** and replace it with your own **`authorized_keys`** file.
 
 ### Edit the root hash
 Edit the /etc/shadow file in both the root and rootB partitions. Either generate a new one or use this one for password "password":
