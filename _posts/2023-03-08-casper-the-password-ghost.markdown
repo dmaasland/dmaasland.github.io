@@ -16,6 +16,7 @@ I wrote this blog years ago (2019) using a Jamf Pro version that probably isn't 
 This is by no means a vulnerability, it's just the nature of encrypting things. Somewhere, somehow, it needs to be decrypted to be useful. For example:
 
 - https://jellevergeer.com/reverse-engineering-and-decrypting-cyberark-vault-credential-files/
+- https://blog.securelayer7.net/static-analysismemory-forensics-reverse-engineering-thick-client-penetration-testing-part-4/
 
 Enjoy!
 
