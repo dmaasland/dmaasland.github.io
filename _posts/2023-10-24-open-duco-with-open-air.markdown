@@ -541,15 +541,15 @@ sensor:
     i2c_id: i2c_sensor_1
     co2:
       name: "Living Room CO2"
-      id: air_Co2
+      id: living_room_co2
       accuracy_decimals: 0
     temperature:
       name: "Living Room Temperature"
-      id: air_temperature
+      id: living_room_temperature
       accuracy_decimals: 2
     humidity:
       name: "Living Room Humidity"
-      id: air_humidity
+      id: living_room_humidity
       accuracy_decimals: 2
     update_interval: 30s
     measurement_mode: periodic
@@ -559,11 +559,11 @@ sensor:
     i2c_id: i2c_sensor_2
     temperature:
       name: "bathroom Temperature"
-      id: sensor_temperature
+      id: bathroom_temperature
       accuracy_decimals: 2
     humidity:
       name: "bathroom Humidity"
-      id: sensor_humidity
+      id: bathroom_humidity
       accuracy_decimals: 2
 
 globals:
